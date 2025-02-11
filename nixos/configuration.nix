@@ -85,6 +85,7 @@
 
   environment.variables = {
     EDITOR = "nvim";
+    TERMINAL = "kitty";
   };
 
   # programs.firefox.enable = true;
