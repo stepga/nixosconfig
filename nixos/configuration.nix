@@ -88,24 +88,44 @@
     TERMINAL = "kitty";
   };
 
+  fonts.packages = with pkgs; [
+    font-awesome
+    dejavu_fonts
+    powerline-fonts
+    powerline-symbols
+  ];
+
   # programs.firefox.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    arandr
     amdgpu_top
+    arandr
     dmidecode
+    evince
     file
     firefox
     git
     htop
+    kitty
     lshw
+    neovim
     networkmanagerapplet
     pass
-    vim
+    tmux
     wget
     which
+    pasystray
+    libinput
+    pulseaudio # pactl in i3wm's config
+    mictray
+    dunst # dbus notification daemond (needed for mictray)
+    pavucontrol
+    tig
+    rofi
+    brightnessctl
+    i3status-rust
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
