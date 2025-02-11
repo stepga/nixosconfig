@@ -83,6 +83,10 @@
     uid = 1000;
   };
 
+  environment.variables = {
+    EDITOR = "nvim";
+  };
+
   # programs.firefox.enable = true;
 
   # List packages installed in system profile. To search, run:
