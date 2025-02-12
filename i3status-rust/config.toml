@@ -40,6 +40,14 @@ button = "left"
 cmd = "pavucontrol"
 
 [[block]]
+block = "battery"
+format = " $icon $percentage "
+full_format = " 🔋 $percentage "
+charging_format = " 🔌 $percentage "
+driver = "sysfs"
+device = "BAT0"
+
+[[block]]
 block = "time"
 interval = 5
 format = " $timestamp.datetime(f:'%a %d/%m %R') "
