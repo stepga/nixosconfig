@@ -125,6 +125,16 @@
     rofi
     brightnessctl
     i3status-rust
+    pcmanfm
+    eog
+    zip
+    unzip
+    xclip
+    imagemagick
+    mpv
+    xcwd
+    yt-dlp
+    pamixer
   ];
 
   programs.neovim = {
