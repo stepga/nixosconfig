@@ -85,7 +85,6 @@
   };
 
   environment.variables = {
-    EDITOR = "nvim";
     TERMINAL = "kitty";
   };
 
@@ -111,7 +110,6 @@
     htop
     kitty
     lshw
-    neovim
     networkmanagerapplet
     pass
     tmux
@@ -128,6 +126,13 @@
     brightnessctl
     i3status-rust
   ];
+
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
