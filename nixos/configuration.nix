@@ -5,12 +5,22 @@
 { config, lib, pkgs, ... }:
 
 let
+  # XXX: Using unpinned builtins.fetchTarball will only cache the download for
+  #      1 hour by default, so one needs internet access almost every time the
+  #      system is rebuilt.
+  home-manager = builtins.fetchTarball {
+    url = "https://github.com/nix-community/home-manager/archive/release-24.11.tar.gz";
+    # XXX: get new tarball hash via `nix-prefetch-url --unpack <URL_TO_TARBALL>`
+    sha256 = "0c07xj74vsj37d3a8f98i9rhhhr99ckwlp45n40f0qkmigm3pk8s"; # 2025-02-27
+  };
+
   username = "feni";
 in
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      (import "${home-manager}/nixos")
     ];
 
   # blacklist internal microphone
@@ -137,10 +147,6 @@ in
     uid = 1000;
   };
 
-  environment.variables = {
-    TERMINAL = "kitty";
-  };
-
   fonts.packages = with pkgs; [
     font-awesome
     dejavu_fonts
@@ -148,67 +154,95 @@ in
     powerline-symbols
   ];
 
-  # programs.firefox.enable = true;
+  environment.variables = {
+    "TERMINAL" = "kitty"; # needed for i3-sensible-terminal
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
+  # XXX: kept in systemPackages as these packages are used within systemd.services scripts
   environment.systemPackages = with pkgs; [
-    amdgpu_top
-    arandr
-    dmidecode
-    evince
-    file
-    firefox
-    git
-    htop
-    kitty
-    lshw
-    networkmanagerapplet
-    pass
-    tmux
-    wget
-    which
-    pasystray
-    libinput
-    pulseaudio # pactl in i3wm's config
-    mictray
-    dunst # dbus notification daemond (needed for mictray)
-    pavucontrol
-    tig
-    rofi
-    brightnessctl
-    i3status-rust
-    pcmanfm
-    eog
-    zip
-    unzip
-    xclip
-    imagemagick
-    mpv
-    xcwd
-    yt-dlp
-    pamixer
-    xss-lock
     gnugrep
     xorg.xrandr
     coreutils-full
 
-    (callPackage ./scripts/clip/derivation.nix {})
+    (callPackage ./scripts/clip/derivation.nix {}) # depends on: xclip, imagemagick
   ];
 
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    viAlias = true;
-    vimAlias = true;
-  };
+  # XXX: Using the global nixpkgs instance saves an extra Nixpkgs evaluation,
+  #      adds consistency, and removes the dependency on NIX_PATH, which is
+  #      otherwise used for importing Nixpkgs.
+  home-manager.useGlobalPkgs = true;
+  home-manager.users."${username}" = { pkgs, ... }: {
+    home.packages = with pkgs; [
+      amdgpu_top
+      arandr
+      brightnessctl
+      dmidecode
+      dunst # dbus notification daemon (needed for mictray)
+      eog
+      evince
+      file
+      firefox
+      htop
+      i3status-rust
+      imagemagick # scripts/clip
+      libinput
+      lshw
+      mictray
+      mpv
+      networkmanagerapplet
+      pass
+      pasystray
+      pavucontrol
+      pcmanfm
+      pulseaudio # pactl in i3wm's config
+      rofi
+      tig
+      tmux
+      unzip
+      wget
+      which
+      xclip
+      xcwd # i3/config (kitty)
+      xss-lock
+      yt-dlp
+      zip
+    ];
+    programs = {
+      bash = {
+        enable = true;
+      };
+      git = {
+        enable = true;
+        includes = [ { path = builtins.toString ./. + "/../gitconfig"; } ];
+      };
+      kitty = {
+        enable = true;
+        settings = {
+          enable_audio_bell = false;
+          copy_on_select = "clipboard";
+        };
+      };
+      neovim = {
+        enable = true;
+        defaultEditor = true;
+        viAlias = true;
+        vimAlias = true;
+        vimdiffAlias = true;
+      };
+    };
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
+    services = {
+      gpg-agent = {
+        enable = true;
+        enableSshSupport = true;
+      };
+    };
+
+    # The state version is required and should stay at the version you
+    # originally installed.
+    home.stateVersion = "24.11";
   };
 
   # Open ports in the firewall.
