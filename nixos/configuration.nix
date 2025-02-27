@@ -8,6 +8,13 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      # Commit hash for master as of 2025-02-27 via
+      # `git ls-remote https://github.com/NixOS/nixos-hardware master`
+      "${builtins.fetchGit {
+        url = "https://github.com/NixOS/nixos-hardware.git";
+	ref = "refs/heads/master";
+	rev = "009b764ac98a3602d41fc68072eeec5d24fc0e49";
+      }}/lenovo/thinkpad/p14s/amd/gen2"
     ];
 
   # We deal with an LUKS encrypted partition
