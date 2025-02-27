@@ -135,6 +135,7 @@
     xcwd
     yt-dlp
     pamixer
+    xss-lock
   ];
 
   programs.neovim = {
