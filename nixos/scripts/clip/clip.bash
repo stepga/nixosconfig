@@ -1,5 +1,5 @@
-#!/usr/bin/env nix-shell
-#!nix-shell --verbose -i bash -p xclip imagemagick
+#!/usr/bin/env bash
+
 set -eu
 
 TMP_FILE=/tmp/clip.png

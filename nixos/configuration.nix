@@ -103,7 +103,6 @@
   environment.variables = {
     TERMINAL = "kitty";
   };
-  environment.localBinInPath = true;
 
   fonts.packages = with pkgs; [
     font-awesome
@@ -153,6 +152,8 @@
     yt-dlp
     pamixer
     xss-lock
+
+    (callPackage ./scripts/clip/derivation.nix {})
   ];
 
   programs.neovim = {
@@ -184,4 +185,3 @@
   # For more information, see `man configuration.nix`
   system.stateVersion = "24.11";
 }
-
