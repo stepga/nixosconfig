@@ -22,6 +22,19 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  systemd.services.disable-sound-leds = rec {
+    # $ man 7 systemd.special:
+    # [...]
+    # This target is started automatically as soon as a sound card is plugged in or becomes available at boot.
+    wantedBy = [ "sound.target" ];
+    after = wantedBy;
+    serviceConfig.Type = "oneshot";
+    script = ''
+      echo off > /sys/class/sound/ctl-led/mic/mode
+      echo off > /sys/class/sound/ctl-led/speaker/mode # follow-route pending https://discourse.nixos.org/t/20480
+    '';
+  };
+
   networking.hostName = "nixtop";
   networking.networkmanager.enable = true; # XOR wpa_supplicant via networking.wireless.enable = true;
 
