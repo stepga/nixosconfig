@@ -10,6 +10,9 @@
       ./hardware-configuration.nix
     ];
 
+  # blacklist internal microphone
+  boot.blacklistedKernelModules = [ "snd_soc_dmic" ];
+
   # We deal with an LUKS encrypted partition
   boot.initrd.luks.devices = {
     root = {
