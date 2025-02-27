@@ -4,6 +4,9 @@
 
 { config, lib, pkgs, ... }:
 
+let
+  username = "feni";
+in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -36,6 +39,34 @@
       echo off > /sys/class/sound/ctl-led/mic/mode
       echo off > /sys/class/sound/ctl-led/speaker/mode # follow-route pending https://discourse.nixos.org/t/20480
     '';
+  };
+
+  systemd.services.reenable-connected-internal-display = {
+    description = "Re-enabling a disabled internal display if needed.";
+    wantedBy = [ "post-resume.target" ];
+    after = [ "post-resume.target" ];
+    environment = {
+      DISPLAY = ":0";
+      XAUTHORITY = "/home/${username}/.Xauthority";
+    };
+    script = ''#!/usr/bin/env bash
+      set -eu
+
+      XRANDR="${pkgs.xorg.xrandr}/bin/xrandr"
+      WC="${pkgs.coreutils}/bin/wc"
+      GREP="${pkgs.gnugrep}/bin/grep"
+      ECHO="${pkgs.coreutils-full}/bin/echo"
+
+      CONNECTED_DISPLAYS=$("$XRANDR" --query | "$GREP" -w connected | "$WC" -l)
+      "$ECHO" "amount of connected displays: $CONNECTED_DISPLAYS"
+
+      if [[ "$CONNECTED_DISPLAYS" -eq 1 ]]; then
+        # only one display is connected, on a notebook this should be the internal one.
+        # `xrandr --auto` re-enables it, preventing a disabled black screen on resume.
+        "$XRANDR" --auto --verbose
+      fi
+    '';
+    serviceConfig.Type = "oneshot";
   };
 
   networking.hostName = "nixtop";
@@ -97,11 +128,11 @@
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.feni = {
+  users.users."${username}" = {
     createHome = true;
     extraGroups = [ "wheel" "video" "audio" "disk" "networkmanager" ];
     group = "users";
-    home = "/home/feni";
+    home = "/home/${username}";
     isNormalUser = true;
     uid = 1000;
   };
@@ -158,6 +189,9 @@
     yt-dlp
     pamixer
     xss-lock
+    gnugrep
+    xorg.xrandr
+    coreutils-full
 
     (callPackage ./scripts/clip/derivation.nix {})
   ];
