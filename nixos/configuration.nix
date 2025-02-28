@@ -187,6 +187,7 @@ in
       htop
       i3status-rust
       imagemagick # scripts/clip
+      killall
       libinput
       lshw
       mictray
@@ -238,6 +239,117 @@ in
         enable = true;
         enableSshSupport = true;
       };
+    };
+
+    # compare generated ~/.config/i3/config with `git show $(git rev-list --max-count=1 --all -- i3/config)^:i3/config)`
+    xsession.windowManager.i3 = {
+      enable = true;
+      config = rec {
+        modifier = "Mod4";
+        keybindings = lib.mkOptionDefault {
+          "XF86AudioMicMute" = "exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle";
+          "XF86AudioMute" = "exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle";
+          "XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%";
+          "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%";
+          "XF86MonBrightnessDown" = "exec --no-startup-id brightnessctl set 5%-";
+          "XF86MonBrightnessUp" = "exec --no-startup-id brightnessctl set +5%";
+          "${modifier}+Return" = ''exec "${pkgs.kitty}/bin/kitty --directory $(${pkgs.xcwd}/bin/xcwd)"'';
+          "${modifier}+Shift+c" = "kill";
+          "${modifier}+p" = ''exec --no-startup-id "${pkgs.rofi}/bin/rofi -modi drun,run,combi -show combi -show-icons"'';
+          "${modifier}+Tab" = "workspace back_and_forth";
+          "${modifier}+Shift+Tab" = "move container to workspace back_and_forth";
+          "${modifier}+Shift+e" = "mode $exitwarning";
+        };
+        startup = [
+          {
+            # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
+            # screen before suspend. Use loginctl lock-session to lock your screen.
+            command = "${pkgs.xss-lock}/bin/xss-lock --transfer-sleep-lock -- i3lock --nofork -c e3da92";
+            always = true;
+            notification = false;
+          }
+          {
+            command = "${pkgs.networkmanagerapplet}/bin/nm-applet";
+            always = true;
+            notification = false;
+          }
+          {
+            # Startup pulseaudio controller for the system tray.
+            command = "${pkgs.killall}/bin/killall --regexp pasystray ; ${pkgs.pasystray}/bin/pasystray";
+            always = true;
+            notification = false;
+          }
+          {
+            # Startup dunst as a dbus notification daemon to handle dbus events (e.g. needed by mictray)
+            command = "${pkgs.dunst}/bin/dunst";
+            always = true;
+            notification = false;
+          }
+          {
+            command = "${pkgs.mictray}/bin/mictray";
+            always = true;
+            notification = false;
+          }
+          # Start XDG autostart .desktop files using dex. See also
+          # https://wiki.archlinux.org/index.php/XDG_Autostart
+          #exec --no-startup-id dex --autostart --environment i3
+        ];
+        bars = [
+          {
+            fonts = {
+              names = [ "pango:DejaVu Sans Mono" ];
+              style = "Bold Semi-Condensed";
+              size = 12.0;
+            };
+            position = "top";
+            statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs";
+          }
+        ];
+      };
+      extraConfig = ''
+        # Font for window titles. Will also be used by the bar unless a different font
+        # is used in the bar {} block below.
+        font pango:DejaVu Sans Mono 12
+
+        set $exitwarning "(E)xit Session 😴(S)leep ⏻(P)oweroff ⟳(R)eboot 🔒(L)ock"
+        mode $exitwarning {
+          bindsym e exec i3-msg exit; mode "default"
+          bindsym s exec systemctl suspend; mode "default"
+          bindsym l exec i3lock -c e3da92; mode "default"
+          bindsym p exec systemctl poweroff; mode "default"
+          bindsym r exec systemctl reboot; mode "default"
+          bindsym Escape mode "default"
+          bindsym Return mode "default"
+        }
+
+        # activate "back and forth" (when i.e. on workspace '4' just hit $mod+4 get to previous one)
+        workspace_auto_back_and_forth yes
+
+        # disable titlebar of windows, add thick borders
+        default_border pixel
+        new_window pixel 4
+        new_float pixel 4
+
+        # --------------------
+        # layout colors
+        # --------------------
+        set $BLACK     #000000
+        set $WHITE     #FFFFFF
+        set $GRAY      #888888
+        # --------------------
+        set $PINK      #EF476F
+        set $ORNGE     #EFCC00
+        set $GREEN     #06D6A0
+        set $BLUE      #118AB2
+        set $BLUEDK    #073B4C
+        # --------------------
+
+        #                       bord    bg      text    indicator (split)
+        client.focused          $BLUEDK $ORNGE  $BLACK  $GREEN
+        client.focused_inactive $BLUEDK $GRAY   $BLACK  $BLUEDK
+        client.unfocused        $BLUEDK $GRAY   $BLACK  $BLUEDK
+        client.urgent           $BLUEDK $PINK   $BLACK  $BLUEDK
+      '';
     };
 
     # The state version is required and should stay at the version you
