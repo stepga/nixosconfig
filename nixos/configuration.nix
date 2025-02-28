@@ -267,7 +267,7 @@ in
                 };
               };
             };
-            icons = "awesome4";
+            icons = "awesome6";
             theme = "gruvbox-dark";
           };
         };
@@ -281,6 +281,10 @@ in
       };
       kitty = {
         enable = true;
+        font = {
+          name = "Font Awesome 6 Free Regular";
+          size = 12;
+        };
         settings = {
           enable_audio_bell = false;
           copy_on_select = "clipboard";
@@ -355,11 +359,14 @@ in
           # https://wiki.archlinux.org/index.php/XDG_Autostart
           #exec --no-startup-id dex --autostart --environment i3
         ];
+        fonts = {
+          names = [ "DejaVu Sans Mono for Powerline" "Font Awesome 6 Free Regular"];
+          size = 12.0;
+        };
         bars = [
           {
             fonts = {
-              names = [ "pango:DejaVu Sans Mono" ];
-              style = "Bold Semi-Condensed";
+              names = [ "DejaVu Sans Mono for Powerline" "Font Awesome 6 Free Regular"];
               size = 12.0;
             };
             position = "top";
@@ -368,10 +375,6 @@ in
         ];
       };
       extraConfig = ''
-        # Font for window titles. Will also be used by the bar unless a different font
-        # is used in the bar {} block below.
-        font pango:DejaVu Sans Mono 12
-
         set $exitwarning "(E)xit Session 😴(S)leep ⏻(P)oweroff ⟳(R)eboot 🔒(L)ock"
         mode $exitwarning {
           bindsym e exec i3-msg exit; mode "default"
