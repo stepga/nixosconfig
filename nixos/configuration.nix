@@ -172,6 +172,15 @@ in
 
   programs.zsh.enable = true;
 
+  # FIXME: install via home manager led to
+  # $ pass foobar
+  #  gpg: public key decryption failed: No pinentry
+  #  gpg: decryption failed: No pinentry
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
+
   # XXX: Using the global nixpkgs instance saves an extra Nixpkgs evaluation,
   #      adds consistency, and removes the dependency on NIX_PATH, which is
   #      otherwise used for importing Nixpkgs.
@@ -327,13 +336,6 @@ in
         clock24 = true;
         keyMode = "vi";
         historyLimit = 1000;
-      };
-    };
-
-    services = {
-      gpg-agent = {
-        enable = true;
-        enableSshSupport = true;
       };
     };
 
