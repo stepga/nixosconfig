@@ -145,6 +145,7 @@ in
     home = "/home/${username}";
     isNormalUser = true;
     uid = 1000;
+    shell = pkgs.zsh;
   };
 
   fonts.packages = with pkgs; [
@@ -168,6 +169,8 @@ in
 
     (callPackage ./scripts/clip/derivation.nix {}) # depends on: xclip, imagemagick
   ];
+
+  programs.zsh.enable = true;
 
   # XXX: Using the global nixpkgs instance saves an extra Nixpkgs evaluation,
   #      adds consistency, and removes the dependency on NIX_PATH, which is
@@ -277,8 +280,24 @@ in
           };
         };
       };
-      bash = {
+      zsh = {
         enable = true;
+        enableCompletion = true;
+        autosuggestion.enable = true;
+        syntaxHighlighting.enable = true;
+        history.size = 20000;
+        shellAliases = {
+          ll = "ls -l";
+          la = "ls -la";
+        };
+        oh-my-zsh = {
+          enable = true;
+          theme = "ys";
+          plugins = [
+            "git"
+            "fzf"
+          ];
+        };
       };
       git = {
         enable = true;
