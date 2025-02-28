@@ -199,7 +199,6 @@ in
       pulseaudio # pactl in i3wm's config
       rofi
       tig
-      tmux
       unzip
       wget
       which
@@ -296,6 +295,13 @@ in
         viAlias = true;
         vimAlias = true;
         vimdiffAlias = true;
+      };
+      tmux = {
+        enable = true;
+        baseIndex = 1;
+        clock24 = true;
+        keyMode = "vi";
+        historyLimit = 1000;
       };
     };
 
