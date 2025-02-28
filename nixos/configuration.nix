@@ -185,7 +185,6 @@ in
       file
       firefox
       htop
-      i3status-rust
       imagemagick # scripts/clip
       killall
       libinput
@@ -211,6 +210,68 @@ in
       zip
     ];
     programs = {
+      i3status-rust = {
+        enable = true;
+        bars = {
+          default = {
+            blocks = [
+              {
+                 block = "disk_space";
+                 path = "/";
+                 info_type = "available";
+                 interval = 10;
+                 warning = 20.0;
+                 alert = 10.0;
+               }
+               {
+                 block = "memory";
+                 format = " $icon $mem_total_used_percents.eng(w:2) ";
+                 format_alt = " $icon_swap $swap_used_percents.eng(w:2) ";
+               }
+               {
+                 block = "cpu";
+                 info_cpu = 20;
+                 warning_cpu = 50;
+                 critical_cpu = 90;
+               }
+               {
+                 block = "sound";
+                 click = [
+                   {
+                     button = "left";
+                     cmd = "pavucontrol";
+                   }
+                 ];
+               }
+               {
+                 block = "battery";
+                 format = " $icon $percentage ";
+                 full_format = " 🔋 $percentage ";
+                 charging_format = " 🔌 $percentage ";
+                 empty_format = " 🪫 $percentage ";
+                 driver = "sysfs";
+                 device = "BAT0";
+               }
+               {
+                 block = "time";
+                 interval = 60;
+                 format = " $timestamp.datetime(f:'%a %d/%m %R') ";
+               }
+            ];
+            settings = {
+              theme =  {
+                theme = "solarized-dark";
+                overrides = {
+                  idle_bg = "#123456";
+                  idle_fg = "#abcdef";
+                };
+              };
+            };
+            icons = "awesome4";
+            theme = "gruvbox-dark";
+          };
+        };
+      };
       bash = {
         enable = true;
       };
@@ -302,7 +363,7 @@ in
               size = 12.0;
             };
             position = "top";
-            statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs";
+            statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs config-default";
           }
         ];
       };
