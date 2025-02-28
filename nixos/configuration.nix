@@ -184,6 +184,7 @@ in
       evince
       file
       firefox
+      fzf
       htop
       imagemagick # scripts/clip
       killall
@@ -191,14 +192,19 @@ in
       lshw
       mictray
       mpv
+      ncdu
       networkmanagerapplet
+      nload
       pass
       pasystray
       pavucontrol
       pcmanfm
       pulseaudio # pactl in i3wm's config
+      ripgrep
+      ripgrep-all # rga, rga-fzf
       rofi
       tig
+      thunderbird
       unzip
       wget
       which
