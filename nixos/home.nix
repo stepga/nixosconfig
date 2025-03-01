@@ -153,13 +153,29 @@
     vimAlias = true;
     vimdiffAlias = true;
     plugins = with pkgs; [
-      vimPlugins.nvim-treesitter.withAllGrammars
       vimPlugins.barbar-nvim
       vimPlugins.fzf-vim
+
+      # git
       vimPlugins.vim-signify
       vimPlugins.vim-fugitive
-      vimPlugins.nvim-lspconfig
+
+      # treesitter: highlighting & indenting; requires gcc
+      vimPlugins.nvim-treesitter.withAllGrammars
+      # nix ftplugin
       vimPlugins.vim-nix
+
+      # lsp
+      vimPlugins.nvim-lspconfig
+
+      # autocompletion plugin
+      vimPlugins.nvim-cmp
+      # LSP source for nvim-cmp
+      vimPlugins.cmp-nvim-lsp
+      # Snippets source for nvim-cmp
+      vimPlugins.cmp_luasnip
+      # Snippets plugin
+      vimPlugins.luasnip
     ];
     #extraWrapperArgs = [
     #  "--prefix"
