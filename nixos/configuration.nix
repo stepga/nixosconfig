@@ -329,6 +329,28 @@ in
         viAlias = true;
         vimAlias = true;
         vimdiffAlias = true;
+        plugins = with pkgs; [
+          vimPlugins.nvim-treesitter.withAllGrammars
+          vimPlugins.barbar-nvim
+          vimPlugins.fzf-vim
+          vimPlugins.vim-signify
+          vimPlugins.vim-fugitive
+        ];
+        #extraWrapperArgs = [
+        #  "--prefix"
+        #  "PATH"
+        #  ":"
+        #  "${lib.makeBinPath [ pkgs.gcc pkgs.go ]}"
+        #];
+        extraPackages = with pkgs; [
+          # tools needed for TreeSitter
+          go
+          gcc
+          # tools needed for fzf-vim
+          #fzf
+          #gopls
+        ];
+        extraConfig = builtins.readFile ../neovim/init.vim;
       };
       tmux = {
         enable = true;
