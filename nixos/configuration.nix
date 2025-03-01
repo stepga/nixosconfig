@@ -298,6 +298,7 @@ in
         shellAliases = {
           ll = "ls -l";
           la = "ls -la";
+          tig = "TIG_SCRIPT=<(echo :toggle id) tig";
         };
         oh-my-zsh = {
           enable = true;
