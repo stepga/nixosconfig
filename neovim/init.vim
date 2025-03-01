@@ -47,6 +47,9 @@ local lspconfig = require('lspconfig')
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
+  -- Enable completion triggered by <c-x><c-o>
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   local bufopts = { noremap=true, silent=true, buffer=bufnr }
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
@@ -113,6 +116,25 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
+
+local wk = require("which-key")
+wk.setup {
+  plugins = {
+    marks = false, -- shows a list of your marks on ' and `
+    registers = false, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+    -- the presets plugin, adds help for a bunch of default keybindings in Neovim
+    -- No actual key bindings are created
+    presets = true
+  },
+}
+wk.add({
+  { "<leader>b",  "<cmd>Buffers<cr>", desc = "Show Buffers (FZF)" },
+  { "<leader>dw", "<cmd>call DeleteTrailingWS()<cr>", desc = "Delete Trailing Space" },
+  { "<leader>cp", "<cmd>call CopyPaste()<cr>", desc = "Toggle 'C&P-Mode'" },
+  { "<leader>cc", "<cmd>call ToggleColorColumn()<cr>", desc = "Toggle ColorColumn" },
+  { "<leader>ll", "<cmd>nohl<cr>", desc = "Clear Search" },
+  { "<leader>q",  "<cmd>bd<cr>", desc = "Close Buffer (:bd)" },
+})
 END
 
 " vim-signify: default updatetime (4000 ms) is too slow for async update
@@ -163,21 +185,7 @@ endfunc
 " |                            MAPPINGS                                        |
 " +----------------------------------------------------------------------------+
 
-nnoremap <Leader>cp :call CopyPaste()<CR>
-nnoremap <Leader>cc :call ToggleColorColumn()<CR>
-nnoremap <Leader>dw :call DeleteTrailingWS()<CR>
-
-" redraw the screen and remove any search highlights.
-" <silent> -> don't show mapped command in status-line
-nnoremap <silent> <Leader>ll :nohl <Esc>
-
-" fzf.vim :Buffers
-nnoremap <silent> <Leader>b :Buffers <Esc>
-
 " move among buffers with CTRL
 " OR use fzf's :Buffers
 map <C-J> :bnext<CR>
 map <C-K> :bprev<CR>
-
-" close the current buffer
-nnoremap <Leader>q :bd<CR>

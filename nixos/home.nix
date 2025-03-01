@@ -155,6 +155,7 @@
     plugins = with pkgs; [
       vimPlugins.barbar-nvim
       vimPlugins.fzf-vim
+      vimPlugins.which-key-nvim
 
       # git
       vimPlugins.vim-signify
