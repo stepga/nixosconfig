@@ -25,6 +25,10 @@ set number
 set tabstop=4
 set shiftwidth=4
 
+autocmd BufEnter *.nix execute 'set tabstop=2'
+autocmd BufEnter *.nix execute 'set shiftwidth=2'
+autocmd BufEnter *.nix execute 'set expandtab'
+
 " +----------------------------------------------------------------------------+
 " |                            PLUGINS                                         |
 " +----------------------------------------------------------------------------+
@@ -37,7 +41,8 @@ require('barbar').setup {
   icons = { filetype = { enabled = false } }
 };
 require('nvim-treesitter.configs').setup {
-  highlight = { enable = true }
+  highlight = { enable = true },
+  indent = { enable = true }
 }
 END
 
