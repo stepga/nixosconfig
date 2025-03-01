@@ -1,8 +1,8 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, lib, variables, ... }:
 
 {
-  home.username = "feni";
-  home.homeDirectory = "/home/feni";
+  home.username = "${variables.username}";
+  home.homeDirectory = "/home/${variables.username}";
 
   home.packages = with pkgs; [
     amdgpu_top

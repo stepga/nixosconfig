@@ -1,0 +1,4 @@
+{
+  username = "feni";
+  hostname = "nixtop";
+}

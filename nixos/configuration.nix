@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{ pkgs, variables, ... }:
 
 {
   imports =
@@ -47,7 +47,7 @@
     after = [ "post-resume.target" ];
     environment = {
       DISPLAY = ":0";
-      XAUTHORITY = "/home/feni/.Xauthority";
+      XAUTHORITY = "/home/${variables.username}/.Xauthority";
     };
     script = ''#!/usr/bin/env bash
     set -eu
@@ -69,7 +69,7 @@
     serviceConfig.Type = "oneshot";
   };
 
-  networking.hostName = "nixtop";
+  networking.hostName = "${variables.hostname}";
   networking.networkmanager.enable = true; # XOR wpa_supplicant via networking.wireless.enable = true;
 
   time.timeZone = "Europe/Berlin";
@@ -128,11 +128,11 @@
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.feni = {
+  users.users."${variables.username}" = {
     createHome = true;
     extraGroups = [ "wheel" "video" "audio" "disk" "networkmanager" ];
     group = "users";
-    home = "/home/feni";
+    home = "/home/${variables.username}";
     isNormalUser = true;
     uid = 1000;
     shell = pkgs.zsh;
