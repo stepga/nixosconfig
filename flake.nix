@@ -21,17 +21,15 @@
         modules = [
           ./configuration.nix
 
-          # make home-manager as a module of nixos
-          # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
+          # make home-manager as a module of nixos so that home-manager
+          # configuration will be deployed automatically when executing
+          # `nixos-rebuild switch`
           home-manager.nixosModules.home-manager
           {
             home-manager.extraSpecialArgs = { inherit variables; };
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-
-            home-manager.users."${variables.username}" = import ./home.nix;
-
-            # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
+            home-manager.users."${variables.username}" = import ./home/home.nix;
           }
         ];
       specialArgs = { inherit variables; };
