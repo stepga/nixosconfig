@@ -38,6 +38,9 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Enable the Flakes feature and the accompanying new nix command-line tool
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   systemd.services.disable-sound-leds = rec {
     # $ man 7 systemd.special:
     # [...]
