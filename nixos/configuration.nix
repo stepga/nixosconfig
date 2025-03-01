@@ -16,7 +16,7 @@ let
 
   username = "feni";
 in
-{
+  {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -48,7 +48,7 @@ in
     script = ''
       echo off > /sys/class/sound/ctl-led/mic/mode
       echo off > /sys/class/sound/ctl-led/speaker/mode # follow-route pending https://discourse.nixos.org/t/20480
-    '';
+      '';
   };
 
   systemd.services.reenable-connected-internal-display = {
@@ -60,21 +60,21 @@ in
       XAUTHORITY = "/home/${username}/.Xauthority";
     };
     script = ''#!/usr/bin/env bash
-      set -eu
+    set -eu
 
-      XRANDR="${pkgs.xorg.xrandr}/bin/xrandr"
-      WC="${pkgs.coreutils}/bin/wc"
-      GREP="${pkgs.gnugrep}/bin/grep"
-      ECHO="${pkgs.coreutils-full}/bin/echo"
+    XRANDR="${pkgs.xorg.xrandr}/bin/xrandr"
+    WC="${pkgs.coreutils}/bin/wc"
+    GREP="${pkgs.gnugrep}/bin/grep"
+    ECHO="${pkgs.coreutils-full}/bin/echo"
 
-      CONNECTED_DISPLAYS=$("$XRANDR" --query | "$GREP" -w connected | "$WC" -l)
-      "$ECHO" "amount of connected displays: $CONNECTED_DISPLAYS"
+    CONNECTED_DISPLAYS=$("$XRANDR" --query | "$GREP" -w connected | "$WC" -l)
+    "$ECHO" "amount of connected displays: $CONNECTED_DISPLAYS"
 
-      if [[ "$CONNECTED_DISPLAYS" -eq 1 ]]; then
-        # only one display is connected, on a notebook this should be the internal one.
-        # `xrandr --auto` re-enables it, preventing a disabled black screen on resume.
-        "$XRANDR" --auto --verbose
-      fi
+    if [[ "$CONNECTED_DISPLAYS" -eq 1 ]]; then
+    # only one display is connected, on a notebook this should be the internal one.
+    # `xrandr --auto` re-enables it, preventing a disabled black screen on resume.
+    "$XRANDR" --auto --verbose
+    fi
     '';
     serviceConfig.Type = "oneshot";
   };
@@ -233,47 +233,47 @@ in
           default = {
             blocks = [
               {
-                 block = "disk_space";
-                 path = "/";
-                 info_type = "available";
-                 interval = 10;
-                 warning = 20.0;
-                 alert = 10.0;
-               }
-               {
-                 block = "memory";
-                 format = " $icon $mem_total_used_percents.eng(w:2) ";
-                 format_alt = " $icon_swap $swap_used_percents.eng(w:2) ";
-               }
-               {
-                 block = "cpu";
-                 info_cpu = 20;
-                 warning_cpu = 50;
-                 critical_cpu = 90;
-               }
-               {
-                 block = "sound";
-                 click = [
-                   {
-                     button = "left";
-                     cmd = "pavucontrol";
-                   }
-                 ];
-               }
-               {
-                 block = "battery";
-                 format = " $icon $percentage ";
-                 full_format = " 🔋 $percentage ";
-                 charging_format = " 🔌 $percentage ";
-                 empty_format = " 🪫 $percentage ";
-                 driver = "sysfs";
-                 device = "BAT0";
-               }
-               {
-                 block = "time";
-                 interval = 60;
-                 format = " $timestamp.datetime(f:'%a %d/%m %R') ";
-               }
+                block = "disk_space";
+                path = "/";
+                info_type = "available";
+                interval = 10;
+                warning = 20.0;
+                alert = 10.0;
+              }
+              {
+                block = "memory";
+                format = " $icon $mem_total_used_percents.eng(w:2) ";
+                format_alt = " $icon_swap $swap_used_percents.eng(w:2) ";
+              }
+              {
+                block = "cpu";
+                info_cpu = 20;
+                warning_cpu = 50;
+                critical_cpu = 90;
+              }
+              {
+                block = "sound";
+                click = [
+                  {
+                    button = "left";
+                    cmd = "pavucontrol";
+                  }
+                ];
+              }
+              {
+                block = "battery";
+                format = " $icon $percentage ";
+                full_format = " 🔋 $percentage ";
+                charging_format = " 🔌 $percentage ";
+                empty_format = " 🪫 $percentage ";
+                driver = "sysfs";
+                device = "BAT0";
+              }
+              {
+                block = "time";
+                interval = 60;
+                format = " $timestamp.datetime(f:'%a %d/%m %R') ";
+              }
             ];
             settings = {
               theme =  {
