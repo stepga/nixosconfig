@@ -131,7 +131,7 @@
 
   programs.git = {
     enable = true;
-    includes = [ { path = builtins.toString ./. + "/../gitconfig"; } ];
+    includes = [ { path = builtins.toString ./. + "/git/config"; } ];
   };
 
   programs.kitty = {
@@ -193,7 +193,7 @@
       #fzf
       #gopls
     ];
-    extraConfig = builtins.readFile ../neovim/init.vim;
+    extraConfig = builtins.readFile ./neovim/init.vim;
   };
 
   programs.tmux = {
