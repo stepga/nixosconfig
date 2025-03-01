@@ -158,6 +158,8 @@
       vimPlugins.fzf-vim
       vimPlugins.vim-signify
       vimPlugins.vim-fugitive
+      vimPlugins.nvim-lspconfig
+      vimPlugins.vim-nix
     ];
     #extraWrapperArgs = [
     #  "--prefix"
@@ -169,6 +171,7 @@
       # tools needed for TreeSitter
       go
       gcc
+      nil
       # tools needed for fzf-vim
       #fzf
       #gopls

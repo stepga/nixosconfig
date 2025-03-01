@@ -21,13 +21,13 @@ set showbreak=↪\
 " show row-numbers
 set number
 
-" display tabs as 4 spaces
-set tabstop=4
-set shiftwidth=4
-
-autocmd BufEnter *.nix execute 'set tabstop=2'
-autocmd BufEnter *.nix execute 'set shiftwidth=2'
-autocmd BufEnter *.nix execute 'set expandtab'
+"" display tabs as 4 spaces
+"set tabstop=4
+"set shiftwidth=4
+"
+"autocmd BufEnter *.nix execute 'set tabstop=2'
+"autocmd BufEnter *.nix execute 'set shiftwidth=2'
+"autocmd BufEnter *.nix execute 'set expandtab'
 
 " +----------------------------------------------------------------------------+
 " |                            PLUGINS                                         |
@@ -44,6 +44,7 @@ require('nvim-treesitter.configs').setup {
   highlight = { enable = true },
   indent = { enable = true }
 }
+require'lspconfig'.nil_ls.setup{}
 END
 
 " vim-signify: default updatetime (4000 ms) is too slow for async update
