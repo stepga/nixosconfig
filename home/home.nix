@@ -171,12 +171,16 @@
 
       # autocompletion plugin
       vimPlugins.nvim-cmp
+      vimPlugins.cmp-buffer
+      vimPlugins.cmp-path
+      vimPlugins.cmp-cmdline
       # LSP source for nvim-cmp
       vimPlugins.cmp-nvim-lsp
       # Snippets source for nvim-cmp
       vimPlugins.cmp_luasnip
-      # Snippets plugin
-      vimPlugins.luasnip
+      # Snippets plugin vsnip
+      vimPlugins.cmp-vsnip
+      vimPlugins.vim-vsnip
     ];
     #extraWrapperArgs = [
     #  "--prefix"
