@@ -146,6 +146,9 @@
 
   programs.zsh.enable = true;
 
+  # needed for packages like `unrar`
+  nixpkgs.config.allowUnfree = true;
+
   # FIXME: install via home manager led to
   # $ pass foobar
   #  gpg: public key decryption failed: No pinentry
