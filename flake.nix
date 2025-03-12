@@ -12,9 +12,10 @@
       # to avoid problems caused by different versions of nixpkgs.
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    vpn-confinement.url = "github:Maroka-chan/VPN-Confinement";
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, ... }: let variables = import ./variables.nix; in {
+  outputs = inputs@{ nixpkgs, home-manager, vpn-confinement, ... }: let variables = import ./variables.nix; in {
     nixosConfigurations = {
       "${variables.hostname}" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -31,6 +32,8 @@
             home-manager.useUserPackages = true;
             home-manager.users."${variables.username}" = import ./home/home.nix;
           }
+
+          vpn-confinement.nixosModules.default
         ];
       specialArgs = { inherit variables; };
       };
