@@ -8,6 +8,7 @@
     amdgpu_top
     arandr
     brightnessctl
+    colordiff
     dmidecode
     dunst # dbus notification daemon (needed for mictray)
     eog
@@ -15,6 +16,7 @@
     file
     firefox
     fzf
+    gparted
     htop
     imagemagick # scripts/clip
     killall
@@ -24,17 +26,20 @@
     mpv
     ncdu
     networkmanagerapplet
+    nextcloud-client
     nload
     pass
     pasystray
     pavucontrol
     pcmanfm
     pulseaudio # pactl in i3wm's config
+    python3
     ripgrep
     ripgrep-all # rga, rga-fzf
     rofi
-    tig
     thunderbird
+    tig
+    unrar
     unzip
     wget
     which
