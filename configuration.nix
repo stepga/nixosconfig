@@ -143,6 +143,7 @@
     coreutils-full
 
     (callPackage ./scripts/clip/derivation.nix {}) # depends on: xclip, imagemagick
+    (callPackage ./scripts/termspawn/derivation.nix {})
   ];
 
   programs.zsh.enable = true;

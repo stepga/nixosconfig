@@ -228,7 +228,7 @@
         "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%";
         "XF86MonBrightnessDown" = "exec --no-startup-id brightnessctl set 5%-";
         "XF86MonBrightnessUp" = "exec --no-startup-id brightnessctl set +5%";
-        "${modifier}+Return" = ''exec "${pkgs.kitty}/bin/kitty --directory $(${pkgs.xcwd}/bin/xcwd)"'';
+        "${modifier}+Return" = ''exec termspawn'';
         "${modifier}+Shift+c" = "kill";
         "${modifier}+p" = ''exec --no-startup-id "${pkgs.rofi}/bin/rofi -modi drun,run,combi -show combi -show-icons"'';
         "${modifier}+Tab" = "workspace back_and_forth";
