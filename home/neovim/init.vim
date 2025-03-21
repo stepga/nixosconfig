@@ -41,6 +41,17 @@ require('nvim-treesitter.configs').setup {
   indent = { enable = true }
 }
 
+-- Set up go-nvim
+require('go').setup()
+local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.go",
+  callback = function()
+   vim.cmd('GoFmt')
+  end,
+  group = format_sync_grp,
+})
+
 -- Set up nvim-cmp.
 local cmp = require'cmp'
 
@@ -110,7 +121,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
 end
 
-local servers = { 'nil_ls' }
+local servers = { 'nil_ls', 'gopls' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,

@@ -18,6 +18,8 @@
     firefox
     fzf
     gparted
+    go
+    gopls
     htop
     imagemagick # scripts/clip
     killall
@@ -173,6 +175,9 @@
       vimPlugins.nvim-treesitter.withAllGrammars
       # nix ftplugin
       vimPlugins.vim-nix
+
+      # go
+      vimPlugins.go-nvim
 
       # lsp
       vimPlugins.nvim-lspconfig
