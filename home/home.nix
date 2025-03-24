@@ -25,6 +25,7 @@
     killall
     libinput
     lshw
+    gnumake
     mictray
     mpv
     ncdu
