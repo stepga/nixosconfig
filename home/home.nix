@@ -16,6 +16,7 @@
     evince
     file
     firefox
+    foliate
     fzf
     gparted
     go
@@ -25,6 +26,7 @@
     killall
     libinput
     lshw
+    gnumake
     mictray
     mpv
     ncdu
