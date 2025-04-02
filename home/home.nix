@@ -16,6 +16,7 @@
     evince
     file
     firefox
+    foliate
     fzf
     gparted
     go
