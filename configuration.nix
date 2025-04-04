@@ -112,6 +112,12 @@
     powerKey = "suspend";
   };
 
+  services.upower = {
+    enable = true;
+    percentageCritical = 3; # default 5
+    criticalPowerAction = "Hibernate";
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."${variables.username}" = {
     createHome = true;
