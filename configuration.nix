@@ -115,7 +115,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."${variables.username}" = {
     createHome = true;
-    extraGroups = [ "wheel" "video" "audio" "disk" "networkmanager" ];
+    extraGroups = [ "wheel" "video" "audio" "disk" "networkmanager" "transmission" ];
     group = "users";
     home = "/home/${variables.username}";
     isNormalUser = true;
