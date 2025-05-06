@@ -42,6 +42,7 @@
     ripgrep
     ripgrep-all # rga, rga-fzf
     rofi
+    ruby
     signal-desktop
     thunderbird
     tig
