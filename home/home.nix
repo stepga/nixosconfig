@@ -32,6 +32,8 @@
     ncdu
     networkmanagerapplet
     nextcloud-client
+    nil
+    nixfmt-rfc-style
     nload
     pass
     pasystray
