@@ -166,6 +166,9 @@
     enableSSHSupport = true;
   };
 
+  # enable pam support for i3lock; https://github.com/NixOS/nixpkgs/issues/401891
+  security.pam.services.i3lock.enable = true;
+
   # For more information, see `man configuration.nix`
   system.stateVersion = "24.11";
 }
