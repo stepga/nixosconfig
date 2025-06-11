@@ -18,6 +18,7 @@
     firefox
     foliate
     fzf
+    gimp
     gparted
     go
     gopls
@@ -30,6 +31,7 @@
     mictray
     mpv
     ncdu
+    nautilus
     networkmanagerapplet
     nextcloud-client
     nil
