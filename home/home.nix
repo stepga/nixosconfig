@@ -19,19 +19,19 @@
     foliate
     fzf
     gimp
-    gparted
+    gnumake
     go
     gopls
+    gparted
     htop
     imagemagick # scripts/clip
     killall
     libinput
     lshw
-    gnumake
     mictray
     mpv
-    ncdu
     nautilus
+    ncdu
     networkmanagerapplet
     nextcloud-client
     nil
@@ -48,6 +48,7 @@
     rofi
     ruby
     signal-desktop
+    simple-scan
     thunderbird
     tig
     unrar
