@@ -28,6 +28,8 @@
     killall
     libinput
     lshw
+    man-pages
+    man-pages-posix
     mictray
     mpv
     nautilus

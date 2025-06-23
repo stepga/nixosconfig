@@ -152,6 +152,8 @@
     (callPackage ./scripts/termspawn/derivation.nix {})
   ];
 
+  documentation.dev.enable = true;
+
   programs.zsh.enable = true;
 
   # needed for packages like `unrar`
