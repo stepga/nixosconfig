@@ -8,7 +8,9 @@
     amdgpu_top
     arandr
     autojump
+    bear
     brightnessctl
+    ccls
     colordiff
     dmidecode
     dunst # dbus notification daemon (needed for mictray)

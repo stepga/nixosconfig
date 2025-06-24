@@ -121,7 +121,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
 end
 
-local servers = { 'nil_ls', 'gopls' }
+local servers = { 'nil_ls', 'gopls', 'ccls' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
