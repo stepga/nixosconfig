@@ -3,10 +3,10 @@
 pkgs.writeShellApplication {
   name = "termspawn";
   runtimeInputs = with pkgs; [
-    coreutils # nohup, cut, ...
+    gnugrep
     kitty
-    xorg.xprop
-    gawk # awk
+    pstree
+    xdotool
   ];
   text = builtins.readFile ./termspawn.sh;
 }

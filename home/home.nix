@@ -45,6 +45,7 @@
     pasystray
     pavucontrol
     pcmanfm
+    pstree
     pulseaudio # pactl in i3wm's config
     python3
     ripgrep
@@ -60,7 +61,7 @@
     wget
     which
     xclip
-    xcwd # i3/config (kitty)
+    xdotool
     xss-lock
     yt-dlp
     zip
