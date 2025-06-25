@@ -150,7 +150,12 @@
         "fzf"
       ];
     };
+    initContent = lib.mkOrder 1200 ''
+      source ~/.functions.sh
+    '';
   };
+
+  home.file.".functions.sh".source = ./functions.sh;
 
   programs.git = {
     enable = true;
