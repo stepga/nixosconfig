@@ -67,6 +67,10 @@
     zip
   ];
 
+  home.sessionPath = [
+    "$HOME/go/bin"
+  ];
+
   programs.i3status-rust = {
     enable = true;
     bars = {
