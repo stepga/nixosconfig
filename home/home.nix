@@ -25,6 +25,7 @@
     go
     gopls
     gparted
+    gore
     htop
     imagemagick # scripts/clip
     killall
