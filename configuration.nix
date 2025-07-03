@@ -4,7 +4,6 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./modules/wireguard.nix
     ];
 
   # blacklist internal microphone
@@ -121,7 +120,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."${variables.username}" = {
     createHome = true;
-    extraGroups = [ "wheel" "video" "audio" "disk" "networkmanager" "transmission" ];
+    extraGroups = [ "wheel" "video" "audio" "disk" "networkmanager" ];
     group = "users";
     home = "/home/${variables.username}";
     isNormalUser = true;
