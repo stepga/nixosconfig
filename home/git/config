@@ -1,6 +1,6 @@
 [user]
 	email		= stepga@nirgendwo.eu
-	name		= stepga
+	name		= "Stephan Gabert"
 [alias]
 	a		= add
 	cv		= commit --verbose
