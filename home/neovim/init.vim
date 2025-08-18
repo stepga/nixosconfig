@@ -205,3 +205,6 @@ endfunc
 " OR use fzf's :Buffers
 map <C-J> :bnext<CR>
 map <C-K> :bprev<CR>
+
+" insert a Markdown-style header with the current date and time
+map <leader>D :put =strftime('# %a %Y-%m-%d %H:%M:%S%z')<CR>
