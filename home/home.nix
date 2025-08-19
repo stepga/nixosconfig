@@ -6,6 +6,7 @@
 
   home.packages = with pkgs; [
     amdgpu_top
+    android-file-transfer
     arandr
     autojump
     bear
