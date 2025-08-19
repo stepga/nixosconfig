@@ -165,7 +165,8 @@
 
   programs.git = {
     enable = true;
-    includes = [ { path = builtins.toString ./. + "/git/config"; } ];
+    # FIXME: The use of string values is deprecated and will be removed in the future.
+    extraConfig = builtins.readFile ./git/config;
   };
 
   programs.kitty = {
