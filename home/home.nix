@@ -5,6 +5,7 @@
   home.homeDirectory = "/home/${variables.username}";
 
   home.packages = with pkgs; [
+    alsa-utils # aplay
     amdgpu_top
     android-file-transfer
     arandr
@@ -64,6 +65,7 @@
     xclip
     xdotool
     xss-lock
+    xxd
     yt-dlp
     zip
     nodejs_24
