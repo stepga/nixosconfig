@@ -22,8 +22,8 @@
     foliate
     fzf
     gimp
+    gcc
     gnumake
-    go
     gopls
     gparted
     gore
@@ -178,6 +178,11 @@
     extraConfig = builtins.readFile ./git/config;
   };
 
+  programs.go = {
+    enable = true;
+    package = pkgs.go_1_25;
+  };
+
   programs.kitty = {
     enable = true;
     font = {
@@ -228,21 +233,6 @@
       # Snippets plugin vsnip
       vimPlugins.cmp-vsnip
       vimPlugins.vim-vsnip
-    ];
-    #extraWrapperArgs = [
-    #  "--prefix"
-    #  "PATH"
-    #  ":"
-    #  "${lib.makeBinPath [ pkgs.gcc pkgs.go ]}"
-    #];
-    extraPackages = with pkgs; [
-      # tools needed for TreeSitter
-      go
-      gcc
-      nil
-      # tools needed for fzf-vim
-      #fzf
-      #gopls
     ];
     extraConfig = builtins.readFile ./neovim/init.vim;
   };
