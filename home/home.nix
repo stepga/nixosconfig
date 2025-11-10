@@ -77,6 +77,8 @@
       statsmodels
       scikitlearn
       matplotlib
+      pyqt5
+      qtpy
     ]))
   ];
 
