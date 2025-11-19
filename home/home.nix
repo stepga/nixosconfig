@@ -16,6 +16,7 @@
     colordiff
     dmidecode
     dunst # dbus notification daemon (needed for mictray)
+    entr # launch and auto-reload on file change: `find ./src/ | entr -r go test src/foo.go`
     eog
     evince
     file
