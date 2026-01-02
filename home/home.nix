@@ -356,6 +356,9 @@
         client.focused_inactive $BLUEDK $GRAY   $BLACK  $BLUEDK
         client.unfocused        $BLUEDK $GRAY   $BLACK  $BLUEDK
         client.urgent           $BLUEDK $PINK   $BLACK  $BLUEDK
+
+        ## force floating for all new windows
+        #for_window [class="[.]*"] floating enable
     '';
   };
 

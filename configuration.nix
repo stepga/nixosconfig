@@ -149,6 +149,9 @@
 
     (callPackage ./scripts/clip/derivation.nix {}) # depends on: xclip, imagemagick
     (callPackage ./scripts/termspawn/derivation.nix {})
+
+    fritzing
+    musescore
   ];
 
   documentation.dev.enable = true;
