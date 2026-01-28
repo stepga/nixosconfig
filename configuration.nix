@@ -173,6 +173,33 @@
   # enable pam support for i3lock; https://github.com/NixOS/nixpkgs/issues/401891
   security.pam.services.i3lock.enable = true;
 
+  #  # XXX temporary trust ~/.mitmproxy/mitmproxy-ca-cert.cer
+  #  security.pki.certificates = [
+  #''
+  #-----BEGIN CERTIFICATE-----
+  #MIIDNTCCAh2gAwIBAgIUB6U+6UoSzarpr4m/TW2e68e8axowDQYJKoZIhvcNAQEL
+  #BQAwKDESMBAGA1UEAwwJbWl0bXByb3h5MRIwEAYDVQQKDAltaXRtcHJveHkwHhcN
+  #MjYwMTA1MTkzNTA3WhcNMzYwMTA1MTkzNTA3WjAoMRIwEAYDVQQDDAltaXRtcHJv
+  #eHkxEjAQBgNVBAoMCW1pdG1wcm94eTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCC
+  #AQoCggEBAOcaR3p8iJ8Zguc5EnbCWLRx+9yC4NIsNMp7hYAPtEi5ven4KgGtrayb
+  #iJ0xgEp36h2DGgWGQf2T+T6MTZ1d5xAe/KRPTYHFQd/P/9C7lKchsvoNhI8yySVo
+  #T1jfhC5JkS6BsTX8wF5mqxQwhq1T1xb0LstyOipeD32tvFLRF37OGNcjgjZML++n
+  #xaFePLm4weYCo2T4tYop3ueAkcCBbK8TwATMUvZ/+Dg5EzGtvjGLVj1PxpBpHGqa
+  #+b7bWp4pEdLiZc6Tq/+MnErRDDIp6e/lr5w1Z5xA6FyONS8BxMfZoVPM/jOi1R50
+  #W2TlpZhdKQ70/0tQIfyXWm4E3mNAgjsCAwEAAaNXMFUwDwYDVR0TAQH/BAUwAwEB
+  #/zATBgNVHSUEDDAKBggrBgEFBQcDATAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYE
+  #FFIHRYMuQ6j9eqCw/20EoMBbGC12MA0GCSqGSIb3DQEBCwUAA4IBAQBzaaXCHfPK
+  #LHvxTUDB9S9ML4qW6BG0om8wQmsx3Ze2fLSfSYO6jMgxS9NDLmKSJPDlZY0GkH/g
+  #FwHov5D4Zi2whb3laxBsz8V0XwO06vq+GO9Ika9DBk/6+90xLrMi4DQGzXk1x5X5
+  #aTuoAX2JX96vhcFdpHu6wtI6amogk1bPM6ItzciD+Wg+TcJuhVkkHCek+w/6Kvoj
+  #F/wWgcHHtXtpw5jrUYBCl9lroXYS6D1OvYQruu3FEW+hJjteNB2i+p48wTONJbSO
+  #fbcYk3KUjhjVxvzpY87VqZ5n7GBxez/teMiVecwHFYvYndvypocCIHhdPkv4S474
+  #I+MMBvwlDTRu
+  #-----END CERTIFICATE-----
+  #''
+  #  ];
+
+
   # For more information, see `man configuration.nix`
   system.stateVersion = "24.11";
 }
