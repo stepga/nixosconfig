@@ -76,7 +76,7 @@
       jupyterlab
       pandas
       statsmodels
-      scikitlearn
+      scikit-learn
       matplotlib
       pyqt5
       qtpy
