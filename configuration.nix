@@ -151,6 +151,8 @@
 
     fritzing
     musescore
+
+    typescript-language-server
   ];
 
   documentation.dev.enable = true;

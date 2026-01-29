@@ -121,12 +121,13 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
 end
 
-local servers = { 'nil_ls', 'gopls', 'ccls' }
+local servers = { 'nil_ls', 'gopls', 'ccls', 'ts_ls' }
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
+  vim.lsp.config(lsp, {
     on_attach = on_attach,
     capabilities = capabilities,
-  }
+  })
+  vim.lsp.enable(lsp)
 end
 
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
