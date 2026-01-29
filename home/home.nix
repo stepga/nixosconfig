@@ -179,8 +179,38 @@
 
   programs.git = {
     enable = true;
-    # FIXME: The use of string values is deprecated and will be removed in the future.
-    extraConfig = builtins.readFile ./git/config;
+    settings = {
+      user = {
+        email = "${variables.git.user.email}";
+        name = "${variables.git.user.name}";
+      };
+      alias = {
+        "a" = "add";
+        "cv" = "commit --verbose";
+        "co" = "checkout";
+        "ca" = "commit -a --verbose";
+        "d" = "diff";
+        "wd" = "diff --word-diff";
+        "lg" = "log --graph --abbrev-commit --decorate --date=format:'%Y-%m-%d %H:%M:%S' --format=format:'%C(bold blue)%h%C(reset) %C(bold green)(%ad)%C(reset) %C(bold)%s%C(reset) | %C(bold red)%an%C(reset)%C(bold cyan)%d%C(reset)'";
+        "ri" = "rebase -i";
+        "s" = "status";
+      };
+      core = {
+        "editor" = "nvim";
+        "lineNumber" = "true";
+        "filemode" = "false";
+        "autocrlf" = "false";
+      };
+      grep = {
+        "linenumber" = "true";
+      };
+      push = {
+        "default" = "matching";
+      };
+      advice = {
+        "ignoredHook" = "false";
+      };
+    };
   };
 
   programs.go = {
