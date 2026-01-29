@@ -105,10 +105,9 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
-  services.logind = {
-    #lidSwitchDocked = "suspend";
-    lidSwitch = "ignore";
-    powerKey = "suspend";
+  services.logind.settings.Login = {
+    HandleLidSwitch = "ignore";
+    HandlePowerKey = "suspend";
   };
 
   services.upower = {
