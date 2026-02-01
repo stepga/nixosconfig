@@ -144,6 +144,8 @@
             };
           };
         };
+        # list of available icon sets:
+        # https://github.com/greshake/i3status-rust/blob/master/doc/themes.md
         icons = "awesome6";
         theme = "gruvbox-dark";
       };
@@ -220,7 +222,7 @@
   programs.kitty = {
     enable = true;
     font = {
-      name = "Font Awesome 6 Free Regular";
+      name = "Font Awesome 7 Free Regular";
       size = 12;
     };
     settings = {
@@ -333,13 +335,13 @@
         #exec --no-startup-id dex --autostart --environment i3
       ];
       fonts = {
-        names = [ "DejaVu Sans Mono for Powerline" "Font Awesome 6 Free Regular"];
+        names = [ "DejaVu Sans Mono for Powerline" "Font Awesome 7 Free Regular"];
         size = 12.0;
       };
       bars = [
         {
           fonts = {
-            names = [ "DejaVu Sans Mono for Powerline" "Font Awesome 6 Free Regular"];
+            names = [ "DejaVu Sans Mono for Powerline" "Font Awesome 7 Free Regular"];
             size = 12.0;
           };
           position = "top";
