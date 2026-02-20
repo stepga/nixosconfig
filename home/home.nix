@@ -275,10 +275,10 @@
 
   programs.tmux = {
     enable = true;
-    baseIndex = 1;
+    baseIndex = 0;
     clock24 = true;
     keyMode = "vi";
-    historyLimit = 1000;
+    historyLimit = 100000;
   };
 
   # compare generated ~/.config/i3/config with `git show $(git rev-list --max-count=1 --all -- i3/config)^:i3/config)`
