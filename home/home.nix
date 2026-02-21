@@ -350,13 +350,14 @@
       ];
     };
     extraConfig = ''
-        set $exitwarning "(E)xit Session 😴(S)leep ⏻(P)oweroff ⟳(R)eboot 🔒(L)ock"
+        set $exitwarning "(E)xit Session 😴(S)leep 💤(H)ibernate ⏻(P)oweroff ⟳(R)eboot 🔒(L)ock"
         mode $exitwarning {
           bindsym e exec i3-msg exit; mode "default"
           bindsym s exec systemctl suspend; mode "default"
           bindsym l exec i3lock -c e3da92; mode "default"
           bindsym p exec systemctl poweroff; mode "default"
           bindsym r exec systemctl reboot; mode "default"
+          bindsym h exec systemctl hibernate; mode "default"
           bindsym Escape mode "default"
           bindsym Return mode "default"
         }
