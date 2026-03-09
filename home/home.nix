@@ -237,38 +237,38 @@
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
-    plugins = with pkgs; [
-      vimPlugins.barbar-nvim
-      vimPlugins.fzf-vim
-      vimPlugins.which-key-nvim
+    plugins = with pkgs.vimPlugins; [
+      barbar-nvim
+      fzf-vim
+      which-key-nvim
 
       # git
-      vimPlugins.vim-signify
-      vimPlugins.vim-fugitive
+      vim-signify
+      vim-fugitive
 
       # treesitter: highlighting & indenting; requires gcc
-      vimPlugins.nvim-treesitter.withAllGrammars
+      nvim-treesitter.withAllGrammars
       # nix ftplugin
-      vimPlugins.vim-nix
+      vim-nix
 
       # go
-      vimPlugins.go-nvim
+      go-nvim
 
       # lsp
-      vimPlugins.nvim-lspconfig
+      nvim-lspconfig
 
       # autocompletion plugin
-      vimPlugins.nvim-cmp
-      vimPlugins.cmp-buffer
-      vimPlugins.cmp-path
-      vimPlugins.cmp-cmdline
+      nvim-cmp
+      cmp-buffer
+      cmp-path
+      cmp-cmdline
       # LSP source for nvim-cmp
-      vimPlugins.cmp-nvim-lsp
+      cmp-nvim-lsp
       # Snippets source for nvim-cmp
-      vimPlugins.cmp_luasnip
+      cmp_luasnip
       # Snippets plugin vsnip
-      vimPlugins.cmp-vsnip
-      vimPlugins.vim-vsnip
+      cmp-vsnip
+      vim-vsnip
     ];
     extraConfig = builtins.readFile ./neovim/init.vim;
   };
