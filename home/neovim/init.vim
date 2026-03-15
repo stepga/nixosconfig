@@ -1,7 +1,7 @@
 " +----------------------------------------------------------------------------+
-" |                            GENERAL SETTINGS                                |
+" |                            BASIC SETTINGS                                  |
 " +----------------------------------------------------------------------------+
-"
+
 " ignorecase+smartcase: case sensitive only if uppercase letters given
 set ignorecase
 set smartcase
@@ -12,7 +12,7 @@ let mapleader = ","
 " show cursor-line & -column
 set cursorcolumn
 set cursorline
-"
+
 " show tabs, trailing spaces, wrapped lines
 set listchars=tab:→\ ,trail:?
 set list
@@ -80,7 +80,8 @@ cmp.setup({
   })
 })
 
--- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+-- Use buffer source for `/` and `?`
+-- XXX: won't work with `native_menu` being enabled
 cmp.setup.cmdline({ '/', '?' }, {
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
@@ -88,7 +89,8 @@ cmp.setup.cmdline({ '/', '?' }, {
   }
 })
 
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+-- Use cmdline & path source for ':'
+-- XXX: won't work with `native_menu` being enabled
 cmp.setup.cmdline(':', {
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
@@ -183,8 +185,10 @@ function! ToggleColorColumn()
   endif
 endfunction
 highlight ColorColumn ctermbg=0 guibg=#333333
+
 " set default textwidth if not set yet
 autocmd BufEnter * execute 'setlocal textwidth=80'
+
 " initially call enable the colorcolumn if possible
 autocmd BufEnter * :call ToggleColorColumn()
 
