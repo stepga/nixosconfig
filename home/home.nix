@@ -45,6 +45,7 @@
     nil
     nixfmt-rfc-style
     nload
+    nvd
     pass
     pasystray
     pavucontrol
