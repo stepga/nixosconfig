@@ -11,6 +11,7 @@
     arandr
     autojump
     bear
+    blueberry
     brightnessctl
     ccls
     colordiff
@@ -328,6 +329,11 @@
         }
         {
           command = "${pkgs.mictray}/bin/mictray";
+          always = true;
+          notification = false;
+        }
+        {
+          command = "${pkgs.blueberry}/bin/blueberry-tray";
           always = true;
           notification = false;
         }
