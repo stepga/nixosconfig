@@ -9,6 +9,7 @@
     amdgpu_top
     android-file-transfer
     arandr
+    arp-scan
     autojump
     bear
     blueberry
@@ -24,14 +25,16 @@
     firefox
     foliate
     fzf
-    gimp
     gcc
+    gimp
     gnumake
     gopls
-    gparted
     gore
+    gparted
     htop
     imagemagick # scripts/clip
+    ipmitool
+    jq
     killall
     libinput
     lshw
@@ -46,6 +49,7 @@
     nil
     nixfmt-rfc-style
     nload
+    nodejs_24
     nvd
     pass
     pasystray
@@ -61,6 +65,7 @@
     simple-scan
     thunderbird
     tig
+    unixtools.netstat
     unrar
     unzip
     wget
@@ -71,17 +76,16 @@
     xxd
     yt-dlp
     zip
-    nodejs_24
     (pkgs.python312.withPackages (ps: with ps; [
-      numpy # these two are
-      scipy # probably redundant to pandas
       jupyterlab
-      pandas
-      statsmodels
-      scikit-learn
       matplotlib
+      numpy # these two are
+      pandas
       pyqt5
       qtpy
+      scikit-learn
+      scipy # probably redundant to pandas
+      statsmodels
     ]))
   ];
 
