@@ -128,7 +128,7 @@
           }
           {
             block = "battery";
-            format = " $icon $percentage ";
+            format = " $icon $percentage (remaining $time_remaining)";
             full_format = " 🔋 $percentage ";
             charging_format = " 🔌 $percentage ";
             empty_format = " 🪫 $percentage ";
