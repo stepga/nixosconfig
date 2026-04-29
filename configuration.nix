@@ -100,7 +100,14 @@
   services.pipewire = {
     enable = true;
     pulse.enable = true;
+    # XXX >>> might help with sound on older hardware during high load
+    #alsa.enable = true;
+    #alsa.support32Bit = true;
+    # XXX <<<
   };
+  # RealtimeKit hands out realtime scheduling priority to user processes on
+  # demand (e.g. to PulseAudio & Pipewire)
+  security.rtkit.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
