@@ -22,7 +22,6 @@
     eog
     evince
     file
-    firefox
     foliate
     fzf
     gcc
@@ -184,6 +183,123 @@
   };
 
   home.file.".functions.sh".source = ./functions.sh;
+
+  programs.firefox = {
+    enable = true;
+
+    # see https://mozilla.github.io/policy-templates/ for
+    policies = {
+      DontCheckDefaultBrowser = true;
+      policies.HardwareAcceleration = false;
+
+      # Extension configuration
+      ExtensionSettings = with builtins;
+        let extension = shortId: uuid: {
+          name = uuid;
+          value = {
+            install_url = "https://addons.mozilla.org/en-US/firefox/downloads/latest/${shortId}/latest.xpi";
+            installation_mode = "normal_installed";
+          };
+        };
+        # find addon short ID example:
+        #   $ wget https://addons.mozilla.org/firefox/downloads/file/4717567/vimium_ff-2.4.2.xpi
+        #   $ unzip vimium_ff-2.4.2.xpi
+        #   $ jq .browser_specific_settings.gecko.id manifest.json
+        #   "{d7742d87-e61d-4b78-b8a1-b469842139fa}"
+        in listToAttrs [
+            (extension "tree-style-tab" "treestyletab@piro.sakura.ne.jp")
+            (extension "ublock-origin" "uBlock0@raymondhill.net")
+            (extension "vimium-ff" "{d7742d87-e61d-4b78-b8a1-b469842139fa}")
+          ];
+
+      "3rdparty".Extensions = {
+        "uBlock0@raymondhill.net".adminSettings = {
+          userSettings = rec {
+            importedLists = [
+              "https:#filters.adtidy.org/extension/ublock/filters/3.txt"
+              "https:#github.com/DandelionSprout/adfilt/raw/master/LegitimateURLShortener.txt"
+            ];
+            externalLists = lib.concatStringsSep "\n" importedLists;
+          };
+
+          selectedFilterLists = [
+            "CZE-0"
+            "adguard-generic"
+            "adguard-annoyance"
+            "adguard-social"
+            "adguard-spyware-url"
+            "easylist"
+            "easyprivacy"
+            "https:#github.com/DandelionSprout/adfilt/raw/master/LegitimateURLShortener.txt"
+            "plowe-0"
+            "ublock-abuse"
+            "ublock-badware"
+            "ublock-filters"
+            "ublock-privacy"
+            "ublock-quick-fixes"
+            "ublock-unbreak"
+            "urlhaus-1"
+          ];
+        };
+      };
+
+      SearchEngines = {
+        Remove = [
+          "Bing"
+          "Ecosia"
+          "Perplexity"
+          "Wikipedia (en)"
+          "eBay"
+        ];
+        Add = [
+          {
+            "Name" = "OpenStreetMap";
+            "URLTemplate" = "https://www.openstreetmap.org/search?query={searchTerms}";
+            "IconURL" = "https://www.openstreetmap.org/favicon.ico";
+            "Alias" = "osm";
+          }
+          {
+            "Name" = "Wikipedia en";
+            "URLTemplate" = "https://en.wikipedia.org/wiki/Special:Search?go=Go&search={searchTerms}";
+            "IconURL" = "https://en.wikipedia.org/favicon.ico";
+            "Alias" = "we";
+          }
+          {
+            "Name" = "Wikipedia de";
+            "URLTemplate" = "https://de.wikipedia.org/wiki/Special:Search?go=Go&search={searchTerms}";
+            "IconURL" = "https://en.wikipedia.org/favicon.ico";
+            "Alias" = "wd";
+          }
+          {
+            "Name" = "YouTube";
+            "URLTemplate" = "https://www.youtube.com/results?search_query={searchTerms}";
+            "IconURL" = "https://www.youtube.com/favicon.ico";
+            "Alias" = "yt";
+          }
+          {
+            "Name" = "Nix Packages";
+            "URLTemplate" = "https://search.nixos.org/packages?channel=25.11&query={searchTerms}";
+            "IconURL" = "https://nixos.org/favicon.ico";
+            "Alias" = "np";
+          }
+          {
+            "Name" = "Nix Options";
+            "URLTemplate" = "https://search.nixos.org/options?channel=25.11&include_modular_service_options=1&include_nixos_options=1&query={searchTerms}";
+            "IconURL" = "https://nixos.org/favicon.ico";
+            "Alias" = "no";
+          }
+          {
+            "Name" = "Home Manager Options";
+            "URLTemplate" = "https://home-manager-options.extranix.com/?release=release-25.11&query={searchTerms}";
+            "IconURL" = "https://nixos.org/favicon.ico";
+            "Alias" = "hm";
+          }
+        ];
+        Default = "Google";
+      };
+      SearchSuggestEnabled = false;
+    };
+  };
 
   programs.git = {
     enable = true;
