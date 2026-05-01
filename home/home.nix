@@ -294,6 +294,12 @@
             "IconURL" = "https://nixos.org/favicon.ico";
             "Alias" = "hm";
           }
+          {
+            "Name" = "English-German Dictionary";
+            "URLTemplate" = "https://www.dict.cc/?s={searchTerms}";
+            "IconURL" = "https://dict.cc/favicon.ico";
+            "Alias" = "en";
+          }
         ];
         Default = "Google";
       };
