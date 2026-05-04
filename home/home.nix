@@ -190,7 +190,17 @@
     # see https://mozilla.github.io/policy-templates/ for
     policies = {
       DontCheckDefaultBrowser = true;
-      policies.HardwareAcceleration = false;
+
+      EncryptedMediaExtensions = {
+        # If Enabled is set to false, encrypted media extensions (like Widevine)
+        # are not downloaded by Firefox unless the user consents to installing
+        # them.
+        Enabled = true;
+        # If Locked is set to true and Enabled is set to false, Firefox will not
+        # download encrypted media extensions (like Widevine) or ask the user to
+        # install them.
+        Locked = false;
+      };
 
       # Extension configuration
       ExtensionSettings = with builtins;
