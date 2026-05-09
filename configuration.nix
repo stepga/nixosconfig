@@ -189,6 +189,11 @@
 
   programs.zsh.enable = true;
 
+  programs.ausweisapp = {
+    enable = true;
+    openFirewall = true;
+  };
+
   # needed for packages like `unrar`
   nixpkgs.config.allowUnfree = true;
 
