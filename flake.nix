@@ -29,7 +29,7 @@
             home-manager.extraSpecialArgs = { inherit variables; };
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users."${variables.username}" = import ./home/home.nix;
+            home-manager.users."${variables.username}" = import ./home/${variables.hostname};
           }
         ];
       specialArgs = { inherit variables; };

@@ -26,6 +26,7 @@
     foliate
     fzf
     gcc
+    gedit
     gimp
     gnumake
     gopls
