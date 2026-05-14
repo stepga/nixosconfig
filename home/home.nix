@@ -5,6 +5,7 @@
   home.homeDirectory = "/home/${variables.username}";
 
   home.packages = with pkgs; [
+    acpi
     alsa-utils # aplay
     amdgpu_top
     android-file-transfer
@@ -39,6 +40,7 @@
     lshw
     man-pages
     man-pages-posix
+    mdcat # mdless
     mictray
     mpv
     nautilus
